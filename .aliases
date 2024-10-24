@@ -1,0 +1,85 @@
+#
+# General aliases
+#
+
+alias apt="sudo apt $@"
+alias hg="history | grep $1"
+alias gw="./gradlew $@"
+alias sl="ls $@"
+alias h="history $@"
+alias doslin="sed -i -e 's/\r$//' $1"
+
+#
+# Git
+#
+
+alias gitf="git fetch --prune"
+alias gitr="git reset HEAD~1 --soft"
+alias gitc="git rebase --continue"
+alias gits="git status"
+alias gitl="git log"
+
+#
+# Docker
+#
+
+alias dps="docker ps"
+alias dc="docker compose"
+alias dcdv="dc down -v"
+alias dcu="dc up -d"
+
+# Get in a docker container
+function dockerin {
+  if [ -z "$1" ]; then
+    echo "No container given."
+  else
+    docker exec -it $1 bash
+  fi
+}
+
+#
+# Java
+#
+
+JAVA_VERSION_FILE=$HOME/java_version
+
+if [ ! -f $JAVA_VERSION_FILE ]; then
+    touch $JAVA_VERSION_FILE
+fi
+
+javahome()
+{
+  if [ -z "$1" ]; then
+    echo "Current java version: $(cat $JAVA_VERSION_FILE)"
+  else
+    if [ "$1" = "17" ]; then
+      echo "17.0.11" > $JAVA_VERSION_FILE
+    elif [ "$1" = "21" ]; then
+      echo "21.0.3" > $JAVA_VERSION_FILE
+    elif [ "$1" = "8" ]; then
+      echo "1.8.0_302" > $JAVA_VERSION_FILE
+    else
+      echo "Invalid java version."
+    fi
+  fi
+  export JAVA_HOME=$HOME/.jdks/corretto-$(cat $JAVA_VERSION_FILE)
+}
+
+# export java home using java_version file
+export JAVA_HOME=$HOME/.jdks/corretto-$(cat $JAVA_VERSION_FILE)
+
+alias java8="$HOME/.jdks/corretto-1.8.0_302/bin/java $@"
+alias java17="$HOME/.jdks/corretto-17.0.11/bin/java $@"
+alias java21="$HOME/.jdks/corretto-21.0.3/bin/java $@"
+
+#
+# General functions
+#
+
+mkcdir ()
+{
+    mkdir -p -- "$1" &&
+      cd -P -- "$1"
+}
+
+
