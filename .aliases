@@ -41,7 +41,7 @@ function dockerin {
 # Java
 #
 
-JAVA_VERSION_FILE=$HOME/java_version
+JAVA_VERSION_FILE=$HOME/.java_version
 
 if [ ! -f $JAVA_VERSION_FILE ]; then
     touch $JAVA_VERSION_FILE
