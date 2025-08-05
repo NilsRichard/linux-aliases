@@ -3,6 +3,12 @@ My linux aliases
 
 ## Setup
 
+### Install
+
+```bash
+bash -c "$(curl -fsSL https://github.com/NilsRichard/linux-aliases/raw/main/setup.sh)"
+```
+
 ### Zshrc
 
 ```zsh
